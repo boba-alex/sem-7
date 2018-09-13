@@ -36,7 +36,7 @@ public class ModelingBasicRandomVariable {
             v[i] = list1[i];
         }
 
-        Random random = new Random(0); // for c[i]
+        Random random = new Random(); // for c[i], ! seed always returns the same pseudo-random sequence !
         for (int t = 0; t < N; t++) {
             int s = (int) (random.nextInt(100) / 100.0 * K);
             list2[t] = v[s];
@@ -92,7 +92,9 @@ public class ModelingBasicRandomVariable {
         }
 
         //Kolmogorov
-        double quantile = 1.36; //для a = 0.05 квантиль уровня 1-a
+
+		//http://helpstat.ru/statisticheskie-tablitsyi/raspredelenie-statistiki-kolmogorova/
+        double quantile = 1.3581; //для a = 0.05 квантиль уровня 1-a
         Arrays.sort(list1);
         Arrays.sort(list2);
 
@@ -120,6 +122,5 @@ public class ModelingBasicRandomVariable {
         if (statistics2 < quantile) {
             System.out.println("Statistics 2 : " + statistics2 + " < " + quantile);
         }
-
     }
 }
