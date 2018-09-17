@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B8844914-85FE-BEBB-77B5-7CC1779E4D75" name="operation_types_to_currency_types">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 20:34:06 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="AD88C5F7-4F1E-B6F3-007E-9DA396510004">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 20:34:29 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="exchange_rate" id="EFE39A0B-B976-91C6-D249-7D0D7717FE79">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 20:35:03 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="operation_type_id" id="83ACD6A4-06CD-09E7-0F3E-DB0DF2D7AA79">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:28:21 UTC</createdTime>
+<generatorID>340456A9-B49C-9004-E63A-F807AB205D62</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<referedAttribute>9D1ACE7C-11CC-3E8B-D80E-08AAB6502589</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="currency_type_id" id="D77FAFAA-7669-8753-685C-698D8D9A9975">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:30:55 UTC</createdTime>
+<generatorID>4CDE5249-0AA4-E334-9EBA-DACF4217A2F0</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<referedAttribute>BDC37DFD-1F8B-51BF-FD73-992A3E8A88BE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="BECF42BC-8FE7-19C9-226C-BD4C04AAD2B2" name="operation_types_to_currency_types PK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 20:34:35 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>AD88C5F7-4F1E-B6F3-007E-9DA396510004</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

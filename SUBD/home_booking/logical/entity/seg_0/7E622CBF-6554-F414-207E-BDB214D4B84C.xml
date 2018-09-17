@@ -1,0 +1,127 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7E622CBF-6554-F414-207E-BDB214D4B84C" name="operations">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 19:29:10 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="83BC9F7E-1DE6-D540-B823-3307E3840A29">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 19:29:46 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="date" id="C3A2A314-3CD7-462D-8537-7E0EE918609E">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 19:29:48 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="description" id="7593D3E1-11F1-4FD5-19FA-F57E8CF1C14A">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 19:29:48 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cash" id="23793101-FF8A-C99D-A282-B676CFE0C7CF">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 20:11:00 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="amount" id="906C1A77-C1F0-F16B-35C8-AEBCEAE52EA8">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 20:11:32 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="family_member_id" id="897A3CDA-C411-C322-7E12-2F1A0FFD4F1C">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:16:05 UTC</createdTime>
+<generatorID>8D7F0F60-33DA-FFCB-9F7F-BEF1EF77A864</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<referedAttribute>4ABF1A75-50A1-FF8A-DEAF-F67B76E0909C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="operation_type_id" id="C0549CEE-B0A2-6B88-9846-3C4DBF804714">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:19:38 UTC</createdTime>
+<generatorID>215F1EFE-D6EC-090E-8315-0600B865AD6E</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<referedAttribute>9D1ACE7C-11CC-3E8B-D80E-08AAB6502589</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="AB59E1C7-60EC-0BD5-76C2-0E36391D77BD" name="Operation PK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 19:30:34 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>83BC9F7E-1DE6-D540-B823-3307E3840A29</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

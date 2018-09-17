@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Home book-keeeping(relational)" id="E8278FD9-189E-6C26-2008-12558A982D6F" mainViewID="F5E25610-865F-5652-B9BA-DDECBF74490F">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 19:29:10 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
+</relationalModel>

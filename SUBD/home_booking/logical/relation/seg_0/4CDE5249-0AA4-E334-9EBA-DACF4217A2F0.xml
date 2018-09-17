@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="currency_type_fk" directorySegmentName="seg_0" id="4CDE5249-0AA4-E334-9EBA-DACF4217A2F0">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:30:55 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<sourcePk>22126F9F-BBBF-C8C0-D585-858AF2FDE223</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>1939B11A-7091-BBA0-F116-C4FC0BADF65B</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>B8844914-85FE-BEBB-77B5-7CC1779E4D75</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

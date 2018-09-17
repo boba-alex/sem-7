@@ -1,0 +1,4 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="main_view" objectID="F5E25610-865F-5652-B9BA-DDECBF74490F" name="Home book-keeeping(relational)" visible="true"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>

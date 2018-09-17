@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0A7BBF98-65A2-87F3-B33E-45BB8934F08B" name="operations">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>7E622CBF-6554-F414-207E-BDB214D4B84C</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="E91E75D0-6080-DD27-4382-234E21C69552">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>83BC9F7E-1DE6-D540-B823-3307E3840A29</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="date" id="6D13C7EF-5507-CD58-AC51-AC32E5761D20">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>C3A2A314-3CD7-462D-8537-7E0EE918609E</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="74E35265-49A2-EBA3-988A-7771C8C31229">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>7593D3E1-11F1-4FD5-19FA-F57E8CF1C14A</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cash" id="7E924A4A-DAA6-0436-1924-07707B9E4D39">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>23793101-FF8A-C99D-A282-B676CFE0C7CF</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="amount" id="B320F2F2-4E81-2C36-2667-D2100C29825B">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>906C1A77-C1F0-F16B-35C8-AEBCEAE52EA8</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="family_members_id" id="5C6738B1-AF8F-A785-2A8B-1B3B3702357A">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>897A3CDA-C411-C322-7E12-2F1A0FFD4F1C</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5954C9C0-2438-AC44-EE88-83C12363B3E9" referredColumn="2334F1AD-5C3E-570A-700F-999707E0B412"/>
+</associations>
+</Column>
+<Column name="operation_types_id" id="D7ADC4AF-7CEF-071A-C664-3D46A89E82DD">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>C0549CEE-B0A2-6B88-9846-3C4DBF804714</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="18D3E93F-4CC1-78F9-5597-14DACF9E2690" referredColumn="A8E0065B-C12D-460B-0371-E877C960CC70"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="882E1870-79CF-409D-568F-9DEB14EA2795" name="operations_PK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>AB59E1C7-60EC-0BD5-76C2-0E36391D77BD</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E91E75D0-6080-DD27-4382-234E21C69552"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E3A358A3-1B5B-531C-A94C-ADDD6D01390E" name="operations_family_members_FK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:38 UTC</createdTime>
+<generatorID>8D7F0F60-33DA-FFCB-9F7F-BEF1EF77A864</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5C6738B1-AF8F-A785-2A8B-1B3B3702357A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1E95E412-E11C-2052-ABF2-52C143232886" name="operations_operation_types_FK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:38 UTC</createdTime>
+<generatorID>215F1EFE-D6EC-090E-8315-0600B865AD6E</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D7ADC4AF-7CEF-071A-C664-3D46A89E82DD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

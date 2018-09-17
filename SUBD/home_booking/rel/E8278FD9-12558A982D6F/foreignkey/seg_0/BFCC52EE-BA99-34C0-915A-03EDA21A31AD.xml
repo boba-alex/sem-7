@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BFCC52EE-BA99-34C0-915A-03EDA21A31AD" containerWithKeyObject="FB3EEFD6-E62B-55FA-D5A4-117C3E711362" localFKIndex="B3F4B559-A3FE-2DF4-73C6-9868D41CBE46" name="operation_types_to_currency_types_operation_types_FK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:38 UTC</createdTime>
+<generatorID>340456A9-B49C-9004-E63A-F807AB205D62</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<referredTableLongName>operation_types</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>E7AD8E5B-ACF5-29E0-E4F2-E467F1F96765</referredTableID>
+<keyObject>310E2013-099B-B3E1-3E83-09EEBAB3D5EC</keyObject>
+<referredKeyID>310E2013-099B-B3E1-3E83-09EEBAB3D5EC</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="operation_type_fk" directorySegmentName="seg_0" id="215F1EFE-D6EC-090E-8315-0600B865AD6E">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:19:38 UTC</createdTime>
+<ownerDesignName>home_booking</ownerDesignName>
+<engineerTo>
+<item key="E8278FD9-189E-6C26-2008-12558A982D6F" value="true"/>
+</engineerTo>
+<sourcePk>B6185207-26B9-B4C2-68FF-A5C02B9D6FE7</sourcePk>
+<targetPk>AB59E1C7-60EC-0BD5-76C2-0E36391D77BD</targetPk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>65FD7625-E1BF-28E7-1F43-E5634C8BF06C</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>7E622CBF-6554-F414-207E-BDB214D4B84C</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

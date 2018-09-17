@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B9189E6F-202A-8D1A-BDE8-FAF5BC11002D" name="family_members">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>41EF691B-7BED-0501-F8AC-4A1FC179E6BE</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="2334F1AD-5C3E-570A-700F-999707E0B412">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>4ABF1A75-50A1-FF8A-DEAF-F67B76E0909C</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="surname" id="1DC144DE-499F-DDD5-A26A-A5F40801A114">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>D0E08E13-0969-EDDE-46D7-480862D97BB3</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="653196B4-1805-3476-71E3-FE2DF1D09164">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>8F8FC1AB-EF1E-FB4E-E0E3-62B0EBE9A2B1</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A6C04779-871B-F063-3033-EDBBC8843191" name="family_members_PK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>4978DE3F-02DE-FF19-1B76-912D4E2C9B66</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2334F1AD-5C3E-570A-700F-999707E0B412"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

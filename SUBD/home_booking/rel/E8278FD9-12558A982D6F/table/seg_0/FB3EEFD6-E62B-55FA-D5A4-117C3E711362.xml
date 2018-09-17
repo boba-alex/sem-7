@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FB3EEFD6-E62B-55FA-D5A4-117C3E711362" name="operation_types_to_currency_types">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>B8844914-85FE-BEBB-77B5-7CC1779E4D75</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="FB8E4313-EE16-D63B-B105-69E154111340">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>AD88C5F7-4F1E-B6F3-007E-9DA396510004</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="exchange_rate" id="99E59539-BABB-EAD3-5BAE-45D0A268E6AF">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>EFE39A0B-B976-91C6-D249-7D0D7717FE79</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="operation_types_id" id="7B7D40CE-A984-F510-56E4-69CECFB44348">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>83ACD6A4-06CD-09E7-0F3E-DB0DF2D7AA79</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BFCC52EE-BA99-34C0-915A-03EDA21A31AD" referredColumn="A8E0065B-C12D-460B-0371-E877C960CC70"/>
+</associations>
+</Column>
+<Column name="currency_types_id" id="62E25E37-44AC-D142-F72D-86624DCDFDCA">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>D77FAFAA-7669-8753-685C-698D8D9A9975</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="96966AE4-90A0-5C05-822F-F27D53344C51" referredColumn="25720981-61D6-0DCA-9F4F-7E879EE9EA9B"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="976354D8-22CB-F0E6-E653-65474C0DE959" name="operation_types_to_currency_types_PK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>BECF42BC-8FE7-19C9-226C-BD4C04AAD2B2</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FB8E4313-EE16-D63B-B105-69E154111340"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="41B1131D-15B4-8CE7-11D1-EAA0482EE668" name="operation_types_to_currency_types_currency_types_FK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:37 UTC</createdTime>
+<generatorID>4CDE5249-0AA4-E334-9EBA-DACF4217A2F0</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="62E25E37-44AC-D142-F72D-86624DCDFDCA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B3F4B559-A3FE-2DF4-73C6-9868D41CBE46" name="operation_types_to_currency_types_operation_types_FK">
+<createdBy>admin</createdBy>
+<createdTime>2018-09-10 21:36:38 UTC</createdTime>
+<generatorID>340456A9-B49C-9004-E63A-F807AB205D62</generatorID>
+<ownerDesignName>home_booking</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7B7D40CE-A984-F510-56E4-69CECFB44348"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
