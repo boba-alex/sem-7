@@ -28,7 +28,7 @@ public class ModelingBasicRandomVariable {
 	//Variant 4) a0 = β = 78 125, K = 256
 	private static final int ALPHA0 = 78125;
 	private static final int BETA = 78125;
-	private static final int K = 256; // нужно в V - helpful for Macklaren-Marsali и для кол-ва numberOfObservatedGradations (сейчас 50, а можно использовать для больших n , иначе > table X2)
+	private static final int K = 256; // нужно в V - helpful for Macklaren-Marsali и для кол-ва numberOfObservatedGradations (сейчас 50, а нужно использовать для больших n , иначе > table X2)
 	private static final int M = Integer.MAX_VALUE;
 	private static final int N = 1000; // количество реализаций моделирования
 	private static final double E = 0.05; // уровень значимости - только когда будет на графике в этом уровне в самом углу справа - имеет тогда значение
@@ -70,7 +70,7 @@ public class ModelingBasicRandomVariable {
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < numberOfObservatedGradations; j++) {
-				if (j / (double) numberOfObservatedGradations < list1[i] && list1[i] < (j + 1) / (double) numberOfDegreesOfFreedom) {
+				if (j / (double) numberOfObservatedGradations < list1[i] && list1[i] < (j + 1) / (double) numberOfObservatedGradations) {
 					v1[j]++;
 					break;
 				}
