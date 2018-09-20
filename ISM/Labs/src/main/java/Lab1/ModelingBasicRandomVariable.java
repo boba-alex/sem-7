@@ -61,16 +61,16 @@ public class ModelingBasicRandomVariable {
 
 		System.out.println("Критерий согласия Пирсона χ2");
 		//частоты (Observed), количество наблюдений = 1000 >=50, частота в каждом должна быть больше или равно 5
-		int numberOfObservatedGradations = 50;
+		int numberOfObservatedGradations = 50; //= K;
 		//если мы имеем выборку, по которой уже посчитана сумма частот, то одну из частот всегда можно определить, как разность общего количества и суммой всех остальных.
 		//На самом деле число независимых слагаемых будет на один меньше, чем количество градаций номинальной переменной n.
 		int numberOfDegreesOfFreedom = numberOfObservatedGradations - 1;
-		int[] v1 = new int[50];
-		int[] v2 = new int[50];
+		int[] v1 = new int[numberOfObservatedGradations];
+		int[] v2 = new int[numberOfObservatedGradations];
 
 		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < 50; j++) {
-				if (j / 50.0 < list1[i] && list1[i] < (j + 1) / 50.0) {
+			for (int j = 0; j < numberOfObservatedGradations; j++) {
+				if (j / (double) numberOfObservatedGradations < list1[i] && list1[i] < (j + 1) / (double) numberOfDegreesOfFreedom) {
 					v1[j]++;
 					break;
 				}
@@ -78,8 +78,8 @@ public class ModelingBasicRandomVariable {
 		}
 
 		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < 50; j++) {
-				if (j / 50.0 < list2[i] && list2[i] < (j + 1) / 50.0) {
+			for (int j = 0; j < numberOfObservatedGradations; j++) {
+				if (j / (double) numberOfObservatedGradations < list2[i] && list2[i] < (j + 1) / (double) numberOfObservatedGradations) {
 					v2[j]++;
 					break;
 				}
@@ -87,8 +87,8 @@ public class ModelingBasicRandomVariable {
 		}
 		double x1 = 0;
 		double x2 = 0;
-		double p = 1 / 50.0;
-		for (int i = 0; i < 50; i++) {
+		double p = 1 / (double) numberOfObservatedGradations;
+		for (int i = 0; i < numberOfObservatedGradations; i++) {
 			x1 += Math.pow(v1[i] - N * p, 2) / (N * p);
 			x2 += Math.pow(v2[i] - N * p, 2) / (N * p);
 		}
