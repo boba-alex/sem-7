@@ -5,6 +5,8 @@ import Lab2.distribution.DiscreteDistribution;
 
 import java.util.Random;
 
+// Биномиальная СВ X – это число успехов в m независимых испытаниях Бернулли,
+// если вероятность успеха в каждом испытании равна p.
 public class BinomialDistribution extends DiscreteDistribution {
 
 	private int m;

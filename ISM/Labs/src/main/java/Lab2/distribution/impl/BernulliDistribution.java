@@ -5,6 +5,9 @@ import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 
 import java.util.Random;
 
+// Распределение Бернулли описывает случайный эксперимент (испытание Бернулли)
+// с двумя исходами: успех (X = 1) и неудача (X = 0),
+// причем вероятность успеха равна p.
 public class BernulliDistribution extends DiscreteDistribution {
 
 	public BernulliDistribution(int n, double p, double e) {

@@ -5,6 +5,9 @@ import Lab2.distribution.DiscreteDistribution;
 
 import java.util.Random;
 
+// Отрица́тельное биномиа́льное распределе́ние, также называемое распределением Паскаля —
+// это распределение дискретной случайной величины равной количеству произошедших неудач
+// в последовательности испытаний Бернулли с вероятностью успеха p, проводимой до r-го успеха.
 public class NegativeBinomialDistribution extends DiscreteDistribution {
 
 	private int r;

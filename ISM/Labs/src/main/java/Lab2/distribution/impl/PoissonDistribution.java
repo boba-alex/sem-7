@@ -5,6 +5,10 @@ import Lab2.distribution.DiscreteDistribution;
 
 import java.util.Random;
 
+// Распределе́ние Пуассо́на — вероятностное распределение дискретного типа,
+// моделирует случайную величину, представляющую собой число событий,
+// произошедших за фиксированное время, при условии, что данные события происходят
+// с некоторой фиксированной средней интенсивностью и независимо друг от друга.
 public class PoissonDistribution extends DiscreteDistribution {
 
 	private double lambda;

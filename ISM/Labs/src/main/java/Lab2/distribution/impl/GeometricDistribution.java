@@ -6,6 +6,8 @@ import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 
 import java.util.Random;
 
+// ДСВ X с законом распределения G(p) есть число испытаний Бернулли до первого успеха
+// (включая первый успех), если вероятность успеха в каждом испытании равна р.
 public class GeometricDistribution extends DiscreteDistribution {
 
 	private double q;
