@@ -12,11 +12,11 @@ public class GeometricDistribution extends DiscreteDistribution {
 
 	private double q;
 
-	public GeometricDistribution(int n, double p, double e, int graduationsCount) {
+	public GeometricDistribution(double p, int n, double e, int graduationsCount) {
 
-		this.n = n;
 		this.p = p;
 		this.q = 1 - p;
+		this.n = n;
 		this.e = e;
 		this.gradationsCount = graduationsCount; // Геом. распредел-е: 1,2,3,4 и >=5,...
 		this.list = new int[n];

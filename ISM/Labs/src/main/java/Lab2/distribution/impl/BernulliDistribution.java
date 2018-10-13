@@ -10,10 +10,10 @@ import java.util.Random;
 // причем вероятность успеха равна p.
 public class BernulliDistribution extends DiscreteDistribution {
 
-	public BernulliDistribution(int n, double p, double e) {
+	public BernulliDistribution(double p, int n, double e) {
 
-		this.n = n;
 		this.p = p;
+		this.n = n;
 		this.e = e;
 		this.gradationsCount = 2; // потому что ДСВ Бернулли принимает значения 0 или 1
 		this.list = new int[n];

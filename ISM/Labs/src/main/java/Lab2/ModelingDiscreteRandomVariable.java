@@ -8,11 +8,11 @@ public class ModelingDiscreteRandomVariable {
 	public static void main(String[] args) {
 
 		DiscreteDistribution[] distributions = new DiscreteDistribution[5];
-		distributions[0] = new BernulliDistribution(1000, 0.2, 0.05);
-		distributions[1] = new GeometricDistribution(1000, 0.6, 0.05, 4);
-		distributions[2] = new BinomialDistribution(1000, 5, 0.25, 0.05);
-		distributions[3] = new NegativeBinomialDistribution(1000, 5, 0.25, 0.05);
-		distributions[4] = new PoissonDistribution(1000, 0.5, 0.05);
+		distributions[0] = new BernulliDistribution(0.2, 1000,0.05);
+		distributions[1] = new GeometricDistribution(0.6, 1000, 0.05, 4);
+		distributions[2] = new BinomialDistribution(5, 0.25, 1000,0.05);
+		distributions[3] = new NegativeBinomialDistribution(5, 0.25, 1000,0.05);
+		distributions[4] = new PoissonDistribution(0.5, 1000,0.05);
 		for (int i = 0; i < 5; i++) {
 			System.out.println('\n' + distributions[i].getName());
 			int[] list = distributions[i].generateSequence();

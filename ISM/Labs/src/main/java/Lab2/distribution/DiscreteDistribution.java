@@ -4,8 +4,8 @@ import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 
 public abstract class DiscreteDistribution {
 
-	protected int n;
 	protected double p;
+	protected int n;
 	protected double e;
 	protected int gradationsCount;
 	protected int[] list;

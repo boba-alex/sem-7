@@ -12,11 +12,11 @@ public class NegativeBinomialDistribution extends DiscreteDistribution {
 
 	private int r;
 
-	public NegativeBinomialDistribution(int n, int r, double p, double e) {
+	public NegativeBinomialDistribution(int r, double p, int n, double e) {
 
-		this.n = n;
 		this.r = r;
 		this.p = p;
+		this.n = n;
 		this.e = e;
 		this.gradationsCount = 10;// 0-3, 4-7,...по 4 * 10 градаций // Отриц. бином. распредел-е: 0,1,...9, 10,11,...19,20,21,...29, и >=30
 		this.list = new int[n];

@@ -13,10 +13,10 @@ public class PoissonDistribution extends DiscreteDistribution {
 
 	private double lambda;
 
-	public PoissonDistribution(int n, double lambda, double e) {
+	public PoissonDistribution(double lambda, int n, double e) {
 
-		this.n = n;
 		this.lambda = lambda;
+		this.n = n;
 		this.e = e;
 		this.list = new int[n];
 		this.gradationsCount = 4; //0,1,2, и >=3
