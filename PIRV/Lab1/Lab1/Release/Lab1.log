@@ -1,0 +1,7 @@
+﻿  Source.cpp
+c1xx : warning C4199: двухэтапный поиск имен не поддерживается для C++/CLI, C++/CX или OpenMP. Используйте /Zc:twoPhase-
+c:\users\admin\desktop\pirv\lab1\lab1\source.cpp(126): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода
+  All 175 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  Lab1.vcxproj -> C:\Users\admin\Desktop\PIRV\Lab1\Release\Lab1.exe
