@@ -29,7 +29,7 @@ public class PoissonDistribution extends DiscreteDistribution {
 	@Override
 	public double probabilityFunction(int x) {
 
-		return Math.pow(lambda, x) * Math.pow(Math.E, -lambda) / MathHelper.factorial(x);
+		return Math.pow(lambda, x) * Math.exp(-lambda) / MathHelper.factorial(x);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class PoissonDistribution extends DiscreteDistribution {
 
 		Random random = new Random();
 		for (int i = 0; i < n; i++) {
-			double p = Math.pow(Math.E, -lambda);
+			double p = Math.exp(-lambda);
 			int x = 0;
 			double r = random.nextDouble();
 			r -= p;
