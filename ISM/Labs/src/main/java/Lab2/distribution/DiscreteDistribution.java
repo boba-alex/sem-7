@@ -10,6 +10,13 @@ public abstract class DiscreteDistribution {
 	protected int gradationsCount;
 	protected int[] list;
 
+	public DiscreteDistribution(int n, double e) {
+
+		this.n = n;
+		this.e = e;
+		this.list = new int[n];
+	}
+
 	public abstract String getName();
 
 	public abstract double probabilityFunction(int x);

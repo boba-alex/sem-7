@@ -12,11 +12,9 @@ public class BernulliDistribution extends DiscreteDistribution {
 
 	public BernulliDistribution(double p, int n, double e) {
 
+		super(n, e);
 		this.p = p;
-		this.n = n;
-		this.e = e;
 		this.gradationsCount = 2; // потому что ДСВ Бернулли принимает значения 0 или 1
-		this.list = new int[n];
 	}
 
 	@Override

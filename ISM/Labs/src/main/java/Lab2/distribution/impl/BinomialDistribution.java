@@ -13,12 +13,10 @@ public class BinomialDistribution extends DiscreteDistribution {
 
 	public BinomialDistribution(int m, double p, int n, double e) {
 
+		super(n, e);
 		this.m = m;
 		this.p = p;
-		this.n = n;
-		this.e = e;
 		this.gradationsCount = m + 1; // Бином. распредел-е: 0,1,...,m
-		this.list = new int[n];
 	}
 
 	@Override
