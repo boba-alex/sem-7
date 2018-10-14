@@ -8,7 +8,7 @@ public abstract class ContinuousDistribution {
 
 	protected int n;
 	protected double e;
-	protected int gradationsCount;
+	protected int gradationsCount = 2; //мат. ожидание - граница двух градаций
 	protected double[] list;
 
 	public ContinuousDistribution(int n, double e) {
@@ -20,7 +20,10 @@ public abstract class ContinuousDistribution {
 
 	public abstract String getName();
 
-	//public abstract double probabilityFunction(int x);
+	public double probabilityFunction(double xLeft, double xRight) {
+
+		return distributionFunction(xRight) - distributionFunction(xLeft);
+	}
 
 	public abstract double distributionFunction(double x);
 
@@ -60,16 +63,6 @@ public abstract class ContinuousDistribution {
 		System.out.println("Unbiased math expectation = " + getUnbiasedEstimateOfMathExpectation() + ", but true value = " + getMathExpectation());
 		System.out.println("Unbiased dispersion = " + getUnbiasedEstimateOfDispersion() + ", but true value = " + getDispersion());
 	}
-
-	public double getTableX2() {
-
-		int numberOfDegreesOfFreedom = gradationsCount - 1;
-		// table value
-		ChiSquaredDistribution chiSquaredDistribution = new ChiSquaredDistribution(numberOfDegreesOfFreedom, ChiSquaredDistribution.DEFAULT_INVERSE_ABSOLUTE_ACCURACY);
-		return chiSquaredDistribution.inverseCumulativeProbability(1 - e);
-	}
-
-	//public abstract double calculateX2();
 
 	public double calculateKolmogorovDistance() {
 
@@ -112,20 +105,52 @@ public abstract class ContinuousDistribution {
 		} else {
 			System.out.println("Rearson criterion is not met.");
 		}
-
 	}
 
-	//	public void pearsonCriterion() {
-	//
-	//		double tableX2 = getTableX2();
-	//		System.out.println("Table χ2 = " + tableX2);
-	//		double calculatedX2 = calculateX2();
-	//		System.out.println("Calculated χ2 = " + calculatedX2);
-	//		if (calculatedX2 < tableX2) {
-	//			System.out.println("Calculated χ2 = " + calculatedX2 + " < tableX2");
-	//		} else {
-	//			System.out.println("Rearson criterion is not met.");
-	//		}
-	//	}
+	public double getTableX2() {
 
+		int numberOfDegreesOfFreedom = gradationsCount - 1;
+		// table value
+		ChiSquaredDistribution chiSquaredDistribution = new ChiSquaredDistribution(numberOfDegreesOfFreedom, ChiSquaredDistribution.DEFAULT_INVERSE_ABSOLUTE_ACCURACY);
+		return chiSquaredDistribution.inverseCumulativeProbability(1 - e);
+	}
+
+	public double calculateX2() {
+
+		int[] v = new int[gradationsCount];
+		double gradationsBoundaryValue = getMathExpectation();
+		for (int i = 0; i < n; i++) {
+			for (int value = 0; value < gradationsCount; value++) {
+				if (list[i] < gradationsBoundaryValue) {
+					v[0]++;
+				} else {
+					v[1]++;
+				}
+			}
+		}
+
+		double[] pk = new double[gradationsCount];
+		pk[0] = probabilityFunction(gradationsBoundaryValue - getDispersion(), gradationsBoundaryValue);
+		pk[1] = 1 - pk[0];
+
+		double x2 = 0;
+		for (int i = 0; i < gradationsCount; i++) {
+			x2 += Math.pow(v[i] - n * pk[i], 2) / (n * pk[i]);
+		}
+		return x2;
+	}
+
+	// FIXME!
+	public void pearsonCriterion() {
+
+		double tableX2 = getTableX2();
+		System.out.println("Table χ2 = " + tableX2);
+		double calculatedX2 = calculateX2();
+		System.out.println("Calculated χ2 = " + calculatedX2);
+		if (calculatedX2 < tableX2) {
+			System.out.println("Calculated χ2 = " + calculatedX2 + " < tableX2");
+		} else {
+			System.out.println("Rearson criterion is not met.");
+		}
+	}
 }

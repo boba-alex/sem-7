@@ -42,7 +42,7 @@ public class ExponentialDistribution extends ContinuousDistribution {
 	public double[] generateSequence() {
 
 		Random random = new Random();
-		for(int  i = 0; i < n; i++){
+		for (int i = 0; i < n; i++) {
 
 			list[i] = -1 / a * Math.log(random.nextDouble());
 		}
