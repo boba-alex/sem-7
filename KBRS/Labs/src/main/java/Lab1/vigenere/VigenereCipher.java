@@ -1,11 +1,15 @@
 package Lab1.vigenere;
 
+import Lab1.kasiski.utils.VigenereStringUtils;
+
 public class VigenereCipher {
 
 	public static byte[] encrypt(String text, String key) {
 
-		text = text.toLowerCase();
-		key = key.toLowerCase();
+		System.out.println("\n--------------------");
+		System.out.println("\nKey : " + key);
+		text = VigenereStringUtils.normalizePlainText(text);
+		key = VigenereStringUtils.normalizePlainText(key);
 		int keyLength = key.length();
 		int[] shifts = new int[keyLength];
 		for (int i = 0; i < keyLength; i++) {
@@ -33,6 +37,8 @@ public class VigenereCipher {
 
 	public static byte[] decrypt(String code, String key) {
 
+		code = VigenereStringUtils.normalizePlainText(code);
+		key = VigenereStringUtils.normalizePlainText(key);
 		code = code.toLowerCase();
 		int keyLength = key.length();
 		int[] shifts = new int[keyLength];

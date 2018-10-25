@@ -4,7 +4,6 @@ import Lab1.kasiski.frequency.FrequencyKeyBreaker;
 import Lab1.kasiski.utils.VigenereStringUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +16,7 @@ public class KasiskiTest {
 
 		String encodedNormalized = VigenereStringUtils.normalizePlainText(encoded);
 
-		out.println("Possibles key lengths are :");
-		out.println("    For Babbage and kasiski:");
+		out.println("Possible key lengths for Kasiski are :");
 
 		final List<KeyLength> kasiskiKeys = new KasiskiKeyLengthEstimator().estimate(encodedNormalized);
 		kasiskiKeys.sort(Comparator.comparingInt(KeyLength::getOccurrence).reversed());
@@ -33,12 +31,14 @@ public class KasiskiTest {
 
 		final String encoded = VigenereStringUtils.normalizePlainText(cypherString);
 		List<String> keys = new ArrayList<>();
+		System.out.println("Prospective keys : ");
 		for (final Integer keyLength : keyLengths) {
 
 			final String key = new FrequencyKeyBreaker().breakKey(encoded, keyLength);
-			System.out.print("Key is: " + key);
+			System.out.print(key + " | ");
 			keys.add(key);
 		}
+		System.out.println();
 		return keys;
 	}
 

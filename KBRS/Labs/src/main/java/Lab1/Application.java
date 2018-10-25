@@ -42,7 +42,7 @@ public class Application {
 
 		JTextArea originalTextArea = new JTextArea(), resulTextArea = new JTextArea(), keyArea = new JTextArea();
 
-		originalTextArea.setEditable(false);
+		originalTextArea.setEditable(true);
 		resulTextArea.setEditable(false);
 		keyArea.setEditable(false);
 		originalTextArea.setLineWrap(true);
@@ -279,6 +279,7 @@ public class Application {
 	private static List<String> hack(String text) {
 
 		List<Integer> keyLengths = KasiskiTest.getKeyLengths(text);
+		System.out.println("Text length to hack : " + text.length());
 
 		return KasiskiTest.getKeys(keyLengths, text);
 	}
