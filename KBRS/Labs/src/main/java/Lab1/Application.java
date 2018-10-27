@@ -31,7 +31,7 @@ public class Application {
 	private static void createGUI() {
 
 		JFrame frame = new JFrame();
-		Font font = new Font("Papyrus", Font.PLAIN, 17);
+		Font font = new Font("Default", Font.PLAIN, 17);
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
 		JMenuItem openItem = new JMenuItem("Open file");
