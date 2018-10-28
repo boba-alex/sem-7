@@ -17,7 +17,7 @@ public class Repetition {
 
 		for (int i = 0; i < positions.size() - 1; ++i) {
 			for (int j = i + 1; j < positions.size(); ++j) {
-				// compute distances from positions
+				//Вычисляю расстояния между позициями
 				distances.add(Math.abs(positions.get(j) - positions.get(i)));
 			}
 		}

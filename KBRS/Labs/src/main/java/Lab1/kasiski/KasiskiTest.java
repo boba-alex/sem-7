@@ -52,7 +52,6 @@ public class KasiskiTest {
 			}
 		}
 		return a + b;
-
 	}
 
 }

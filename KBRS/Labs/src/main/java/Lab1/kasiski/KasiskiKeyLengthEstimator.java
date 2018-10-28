@@ -6,23 +6,17 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-public class KasiskiKeyLengthEstimator implements KeyLengthEstimator {
+public class KasiskiKeyLengthEstimator {
 
     private final CommonDivisors.CommonDivisorLimit maxDivisor = new CommonDivisors.CommonDivisorLimit(20);
     private final CommonDivisors commonDivisorsUtils = new CommonDivisors(maxDivisor);
     private final ProbableKeySelector selector = new ProbableKeySelector();
 
-    /**
-     * Estimate the probable length of the key (based on common divisors of the distance between words) using kasiski method
-     *
-     * @param encoded the encrypted text
-     * @return A List of probable key length.
-     */
-    @Override
+   //Нахожу длину ключа в зависимости от расстояния между словами повторяющимися
     public List<KeyLength> estimate(final String encoded) {
         final List<KeyLength> probableKeys;
         try {
-            // Gather all text repetition from the cypher
+            // Получаю все текстовые повторения
             probableKeys = new MultithreadedRepetitionCounter().count(encoded).parallelStream()
                     // Based on text repetition, we find distance between repetition and common divisors between these distances
                     .map(Repetition::getDistances)

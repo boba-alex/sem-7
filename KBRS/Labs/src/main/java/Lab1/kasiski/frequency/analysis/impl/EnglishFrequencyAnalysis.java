@@ -8,7 +8,8 @@ public class EnglishFrequencyAnalysis extends FrequencyAnalysis {
 
 	public EnglishFrequencyAnalysis() {
 
-		super(new HashMap<String, Double>() {
+		super(new HashMap<>() {
+
 			{
 				put("a", 0.082D);
 				put("b", 0.015D);
