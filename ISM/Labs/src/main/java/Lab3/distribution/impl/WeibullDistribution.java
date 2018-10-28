@@ -54,4 +54,10 @@ public class WeibullDistribution extends ContinuousDistribution {
 		}
 		return list;
 	}
+
+	//Probability density function (плотность вероятности) стр. 158 Вадинский
+	public double pdf(double x) {
+
+		return lambda * b * Math.pow(x, b - 1) * Math.exp(-lambda * Math.pow(x, b)); // x > 0
+	}
 }
