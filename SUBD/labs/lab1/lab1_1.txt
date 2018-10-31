@@ -1,0 +1,86 @@
+--Выбирите СУБД Oracle для выполнения лабораторной. 
+--В зависимости от выбора скопируйте файл  FPMI-STUD\SUBFACULTY\Каф.ИСУ\Исаченко\Лабораторные\EDU1.sql в каталог C:\TEMP .
+--Раскройте файл и ознакомтесь со скриптом создания и заполнения таблиц для выполнения лабораторной.
+--Если работаете в своей системе Oracle,запустите скрипт EDU1.txt на выполнение.
+--Произведите запуск SQLPlus или PLSQLDeveloper и соеденитесь с БД под логином Scott и паролем Tiger.  Запустите скрипт EDU1.sql на выполнение.
+--Вставте в эту строку Ваши ФИО, номер группы, курса. ФИО Полищук Александр Михайлович, группа     1       , курс 4.   
+--Файл с отчётом о выполнении лабораторной создаётся путём вставки соответсвующего select-предложения после строки с текстом задания. 
+--Файл отчёта именуется фамилией студента  в английской транскрипции, с расширением .txt и сохраняется в каталог  FPMI-SERV604\Common_stud\Исаченко\Лаб\Гр_ .
+--Тексты заданий:
+--1.	Выдать информацию об дате рождения работника Robert Grishuk.
+SELECT birthdate FROM emp WHERE empname='Robert Grishuk';
+--2.	Выдать информацию обо всех работниках, родившихся в период с 1.01.1980 по 31.12.1982.
+SELECT * FROM emp WHERE birthdate >= to_date('01-01-1980', 'dd-mm-yyyy') AND birthdate <= to_date('31-12-1982', 'dd-mm-yyyy');
+--3.	Найти минимальный оклад, предусмотренный для бухгалтера  (Accountant).
+SELECT minsalary FROM job WHERE jobname = 'Accountant';
+--4.	Подсчитать число работников, работавших в компании до 31 мая 2010 года включительно хотя бы один день.
+SELECT COUNT(DISTINCT empno) FROM career WHERE startdate <= to_date('31-05-2010', 'dd-mm-yyyy') AND (startdate < enddate OR enddate IS NULL);
+--5.	Найти масимальные премии, начисленные в 2014, 2015, 2016, 2017 годах (указать год и максимальную премию в хронологическом порядке). 
+SELECT YEAR, max(bonvalue) 
+FROM bonus 
+WHERE (YEAR > 2013 
+AND YEAR < 2018) 
+GROUP BY YEAR 
+ORDER BY YEAR;
+--6.	Выдать информацию о кодах отделов,  в которых работал работник Robert Grishuk. Если Robert Grishuk работает в настоящее время - отдел также включается в искомый список.
+SELECT DISTINCT career.deptid 
+FROM career 
+INNER JOIN emp ON emp.empno = career.empno 
+WHERE (emp.empname = 'Robert Grishuk');
+--7.	Выдать информацию о названиях должностей,  на которых работали работники Vera Rovdo и Dave Hollander. Если один из них или оба  работают в настоящее время - должность также включается в искомый список. 
+--	Должность выдаётся вместе с ФИО (empname) работника.
+SELECT DISTINCT job.jobname, emp.empname 
+FROM career 
+INNER JOIN emp ON emp.empno = career.empno 
+INNER JOIN job ON job.jobno = career.jobno 
+WHERE (emp.empname = 'Vera Rovdo' OR emp.empname = 'Dave Hollander');
+-- 8.	Найти фамилии, коды должностей, периоды времени (даты приема и даты увольнения) для всех инженеров (Engineer) и программистов (Programmer), работавших или работающих в компании. Если работник работает
+--	в настоящий момент, то дата увольнения должна выдаваться как Null. 
+SELECT emp.empname, job.jobno, career.startdate, career.enddate 
+FROM career 
+INNER JOIN emp ON emp.empno = career.empno 
+INNER JOIN job ON job.jobno = career.jobno 
+WHERE (job.jobname = 'Engineer' OR job.jobname = 'Programmer');
+-- 9.	Найти фамилии, названия должностей, периоды времени (даты приема и даты увольнения) для бухгалтеров (Accountant) и продавцов (Salesman),  работавших или работающих в компании. Если работник работает
+--	в настоящий момент, то дата увольнения отсутствует. 
+SELECT emp.empname, job.jobname, career.startdate, career.enddate 
+FROM career 
+INNER JOIN emp ON emp.empno = career.empno 
+INNER JOIN job ON job.jobno = career.jobno 
+WHERE (job.jobname = 'Accountant' OR job.jobname = 'Salesman');
+-- 10.	Найти количество различных работников, работавших в отделе B02 хотя бы один день в период с 01.01.2005 по настоящий момент. 
+SELECT COUNT(DISTINCT emp.empname) 
+FROM emp 
+INNER JOIN career ON emp.empno = career.empno 
+WHERE ( deptid = 'B02' AND enddate >= to_date('01.01.2005','dd.mm.yyyy') 
+AND (enddate IS NULL OR (enddate <= CURRENT_DATE AND startdate < enddate)));
+-- 11.	Найти фамилии этих работников.
+SELECT DISTINCT emp.empname
+FROM emp 
+INNER JOIN career ON emp.empno = career.empno 
+WHERE ( deptid = 'B02' AND enddate >= to_date('01.01.2005','dd.mm.yyyy') 
+AND (enddate IS NULL OR (enddate <= CURRENT_DATE AND startdate < enddate)));
+--12.	Найти номера и названия отделов, в которых в период с 01.01.2017 по 31.12.2017  работало не более пяти работников.
+SELECT DISTINCT dept.deptid, dept.deptname 
+FROM dept JOIN career ON career.deptid = dept.deptid 
+WHERE (enddate >= to_date('01-01-2017', 'dd-mm-yyyy') AND enddate <= to_date('31-12-2017','dd-mm-yyyy')) 
+OR (enddate IS NULL and startdate <= to_date('31-12-2017','dd-mm-yyyy')) 
+GROUP BY(dept.deptid, dept.deptname) HAVING COUNT(empno) <= 5;
+--13.	Найти информацию об отделах (номер, название), всем работникам которых не начислялась премия в период с 01.01.2017 по  31.12.2017.
+
+--14.	Найти количество работников, никогда не работавших и не работающих в исследовательском  (Research) отделе, но работавших или работающих в отделе поддержки (Support). 
+
+-- 15	Найти коды и фамилии работников, работавших в двух и более отделах, но не работающих в настоящее время в компании.
+
+-- 16	Найти коды и фамилии работников, работавших в двух и более должностях, но не работающих в настоящее время в компании.
+
+-- 17	Найти коды  и фамилии работников, суммарный стаж работы которых в компании на текущий момент не более 8 лет.
+
+-- 18	Найти всех работников (коды и фамилии), увольнявшихся хотя бы один раз.
+
+--19.	Найти среднии премии, начисленные за период в три 2014, 2015, 2016 года, и за период в три 2015, 2016, 2017 года, в разрезе работников (т.е. для работников, имевших начисления хотя бы в одном месяце трёхгодичного периода). 
+--	Вывести id, имя и фимилию работника, период, среднюю премию.
+
+--20.	Найти отделы (id, название, адрес), в которых есть начисления премий в апреле и марте 2016 года.
+
+
