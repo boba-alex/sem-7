@@ -1,12 +1,12 @@
-package lol.final1;
+package Lab_1.final1;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Random;
 import java.util.Scanner;
 
-import static lol.final1.AlphabetUtils.FIRST_SYMBOL;
-import static lol.final1.AlphabetUtils.LAST_SYMBOL;
+import static Lab_1.final1.AlphabetUtils.FIRST_SYMBOL;
+import static Lab_1.final1.AlphabetUtils.LAST_SYMBOL;
 
 public class KasiskiTest {
 
