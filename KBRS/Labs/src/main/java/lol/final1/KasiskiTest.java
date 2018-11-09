@@ -70,7 +70,7 @@ public class KasiskiTest {
 	public static String getKeyLengthsByTextLength(String text, String key) {
 
 		Random r = new Random();
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder("TextLength : Probability of success \n");;
 		for (int i = 50; i <= 1000; i += 50) {
 			double probability = 0;
 			int n = 1000;
@@ -90,7 +90,7 @@ public class KasiskiTest {
 	public static String getKeyLengthsByKeyLength(String text, int l_gramm) {
 
 		Random r = new Random();
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder("KeyLength : Probability of success\n");
 		for (int i = 1; i < 15; i++) {
 			double probability = 0;
 			int n = 1000;
