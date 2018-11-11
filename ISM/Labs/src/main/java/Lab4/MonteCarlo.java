@@ -93,9 +93,9 @@ public class MonteCarlo {
 
 			// генерирование равномерно распределенной случайно величины
 			double r1 = random.nextDouble();
-			double x = 1;//(b - a) * r1 + a;
+			double x = (b - a) * r1 + a;
 			double r2 = random.nextDouble();
-			double y = 1;//(b - a) * r2 + a;
+			double y = (b - a) * r2 + a;
 			if (between(x * x + y * y, 1, 3)) {
 				integralResult += g.apply(x, y) / (p * p);
 			}
