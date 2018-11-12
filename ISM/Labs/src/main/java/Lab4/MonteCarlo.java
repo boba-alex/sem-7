@@ -1,6 +1,6 @@
 package Lab4;
 
-import javafx.util.Pair;
+import org.apache.commons.math3.util.Pair;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
