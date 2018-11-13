@@ -1,5 +1,10 @@
 package Lab5;
 
+import Lab4.GraphicsUtils;
+import org.apache.commons.math3.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MonteCarloSLAU {
@@ -17,16 +22,17 @@ public class MonteCarloSLAU {
 	static double[] hy = {0, 1}; // h для вычисления y
 	static double[] pi; // вектор нач состояний цепи маркова
 	static double[][] p; //матрица переходных вероятностей
-	static int N = 1000; // длина Цепи Маркова
-	static int[] i = new int[N + 1]; // цепь Маркова
-	static double[] Q = new double[N + 1]; //веса состояний цепи Маркова
-	static int m = 10000; // кол-во реализаций цепи Маркова
-	static double[] ksi = new double[m]; //СВ
+	static int N; // длина Цепи Маркова
+	static int[] i; // цепь Маркова
+	static double[] Q; //веса состояний цепи Маркова
+	static int m; // кол-во реализаций цепи Маркова
+	static double[] ksi; //СВ
 	static double alpha; // БСВ
 
 	public static void main(String[] args) {
 
-		test1();
+		//testExampleFromBook();
+		testExample2FromPhoto();
 	}
 
 	public static double calculate(double[] h) {
@@ -86,9 +92,11 @@ public class MonteCarloSLAU {
 		return x;
 	}
 
-	public static void test1() {
+	//ИСМ, стр. 61
+	public static void testExampleFromBook() {
 
-		//double[][] a1 = {{1.1, -0.8}, {-0.7, -0.3}};
+		//double[][] a1 = {{1.1, -0.8},
+		// 				   {-0.7, -0.3}};
 		//double[] f1 = {0.1, 0.1};
 		//x = Ax + f
 		//все собств зн-я А меньше единицы
@@ -97,6 +105,7 @@ public class MonteCarloSLAU {
 
 		pi = new double[] {0.5, 0.5};
 		p = new double[][] {{0.5, 0.5}, {0.5, 0.5}};
+		setMarkovParameters(1000, 10000);
 
 		x = calculate(hx);
 		y = calculate(hy);
@@ -104,4 +113,74 @@ public class MonteCarloSLAU {
 		System.out.println(y);
 	}
 
+	public static void testExample1() {
+
+		//A = {1.1 -0.1 0.2} f = {-3}
+		//    {0.1 0.5 0.3}		{1}
+		//    {-0.3 -0.1 1.3}   {4}
+		//x = Ax + f
+		//все собств зн-я А меньше единицы
+		double xTrue = -175.0 / 57;
+		double yTrue = 65.0 / 57;
+		double zTrue = 140.0 / 57;
+
+	}
+
+	public static void testExample2FromPhoto() {
+
+		//x = Ax + f
+		//system
+		//x = -0.3x + 0.2y + 2
+		//y = -0.2x + 0.3y - 1
+		//все собств зн-я А меньше единицы
+		a = new double[][] {{-0.3, 0.2}, {-0.2, 0.3}};
+		f = new double[] {2, -1};
+
+		pi = new double[] {0.5, 0.5};
+		p = new double[][] {{0.5, 0.5}, {0.5, 0.5}};
+		setMarkovParameters(1000, 10000);
+
+		x = calculate(hx);
+		y = calculate(hy);
+		System.out.println("Test example 2 from photo (variant 4)");
+		System.out.println("x: " + x);
+		System.out.println("y: " + y);
+
+		double xTrue = 24.0 / 19;
+		double yTrue = -34.0 / 19;
+		System.out.println("xTrue: " + xTrue);
+		System.out.println("yTrue: " + yTrue);
+
+		double perfectDifference = 0;
+		List<Pair<Integer, Double>> results = new ArrayList<>();
+		// тест по длине цепи Маркова
+		for (int j = 1000; j < 2000; j += 50) {
+			setMarkovParameters(j, 10000);
+			x = calculate(hx);
+			y = calculate(hy);
+			double difference = Math.abs(x - xTrue) + Math.abs(y - yTrue);
+			results.add(new Pair<>(j, difference));
+		}
+		GraphicsUtils.show(results, perfectDifference);
+
+		results.clear();
+		// по кол-ву реализаций цепи Маркова
+		for (int j = 10000; j < 15000; j += 1000) {
+			setMarkovParameters(1000, j);
+			x = calculate(hx);
+			y = calculate(hy);
+			double difference = Math.abs(x - xTrue) + Math.abs(y - yTrue);
+			results.add(new Pair<>(j, difference));
+		}
+		GraphicsUtils.show(results, perfectDifference);
+	}
+
+	private static void setMarkovParameters(int N_, int m_) {
+
+		N = N_;
+		m = m_;
+		i = new int[N + 1];
+		Q = new double[N + 1];
+		ksi = new double[m];
+	}
 }
