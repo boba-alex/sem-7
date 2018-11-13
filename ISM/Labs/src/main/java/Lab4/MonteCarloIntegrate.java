@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class MonteCarlo {
+public class MonteCarloIntegrate {
 
 	//плотность вероятности равномерного распределения
 	public static double p(double a, double b) {
