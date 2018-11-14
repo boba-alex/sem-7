@@ -32,7 +32,8 @@ public class MonteCarloSLAU {
 	public static void main(String[] args) {
 
 		//testExampleFromBook();
-		testExample2FromPhoto();
+		//testExample2FromPhoto();
+		testExample1();
 	}
 
 	public static double calculate(double[] h) {
@@ -120,9 +121,28 @@ public class MonteCarloSLAU {
 		//    {-0.3 -0.1 1.3}   {4}
 		//x = Ax + f
 		//все собств зн-я А меньше единицы
+		//fpm.lobach@gmail.com
+		a = new double[][] {{-0.1, 0.1, -0.2}, {-0.1, 0.5, -0.3}, {0.3, 0.1, -0.3}};
+		f = new double[] {-3, 1, 4};
+
+		pi = new double[] {0.33, 0.33, 0.33};
+		p = new double[][] {{0.33, 0.33, 0.33}, {0.33, 0.33, 0.33}, {0.33, 0.33, 0.33}};
+		setMarkovParameters(1000, 10000);
+
+		x = calculate(new double[] {1, 0, 0});
+		y = calculate(new double[] {0, 1, 0});
+		double z = calculate(new double[] {0, 0, 1});
+		System.out.println("Test example 2 from photo (variant 4)");
+		System.out.println("x: " + x);
+		System.out.println("y: " + y);
+		System.out.println("z: " + z);
+
 		double xTrue = -175.0 / 57;
 		double yTrue = 65.0 / 57;
 		double zTrue = 140.0 / 57;
+		System.out.println("xTrue: " + xTrue);
+		System.out.println("yTrue: " + yTrue);
+		System.out.println("zTrue: " + zTrue);
 
 	}
 

@@ -10,7 +10,9 @@ import java.util.function.Function;
 
 public class MonteCarloIntegrate {
 
-	//плотность вероятности равномерного распределения
+	//плотность вероятности равномерного распределения (т.к. от a до b)
+	//эспоненц - 0 +бескон
+	//нормал - -бескон + бескон
 	public static double p(double a, double b) {
 
 		return 1 / (b - a);
