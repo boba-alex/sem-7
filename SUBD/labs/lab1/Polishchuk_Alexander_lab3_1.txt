@@ -1,0 +1,341 @@
+--лабораторная выполняется в СУБД  Oracle. 
+--В зависимости от выбора скопируйте файлы  FPMI\SERV314\SUBFACULTY\каф ИСУ\Исаченко\Лабораторные\EDU3.sql  в каталог C:\TEMP .
+--Раскройте файл и ознакомтесь со скриптом создания и заполнения таблиц для выполнения лабораторной. Таблица Bonus имеет дополнительный столбец tax (налог) со значениями null.  
+--Произведите запуск SQLPlus или PLSQLDeveloper и соеденитесь с БД под логином Scott и паролем Tiger.  Запустите скрипты EDU3.sql на выполнение.
+--Вставте в эту строку Ваши ФИО, номер группы, курса. ФИО  Полищук Александр Михайлович                     , группа     1       , курс 4.      
+--Файл с отчётом о выполнении лабораторной создаётся путём вставки скриптов, созданных Вами программ после пунктов 1a), 1b), 1c), 2), 3), 4).
+--Файл отчёта именуется фамилией студента  в английской транскрипции, с расширением .txt и сохраняется в каталог  fpmi-serv604\comman_stud\исаченко\Лаб\Гр_.
+--Вам необходимо создать блоки (программы) для начисления налога на прибыль и занесения его в соответсвующую запись таблицы Bonus.
+--Налог вычисляется по следующему правилу: 
+--налог равен 9% от начисленной  в месяце премии, если среднемесячная премия (с учётом месяцев,в которые нет начислений) с начала года до конца рассматриваемого месяца не превышает 300;
+--налог равен 12% от начисленной  в месяце премии, если среднемесячная премия (с учётом месяцев,в которые нет начислений) с начала года до конца рассматриваемого месяца больше 300, 
+--но не превышает 500;
+--налог равен 15% от начисленной  в месяце премии, если среднемесячная премия (с учётом месяцев,в которые нет начислений) с начала года до конца рассматриваемого месяца  больше 500.
+
+--1.	Составьте в виде неименованного блока программу вычисления налога и вставки его в таблицу Bonus:
+--a) с помощью простого цикла (loop) с курсором, оператора if и опретора case;
+DECLARE 
+CURSOR taxCursor IS 
+SELECT bonusC.empno, bonusC.month, bonusC.year, sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+i taxCursor % ROWTYPE; 
+taxPercent REAL := 0; 
+BEGIN OPEN taxCursor; 
+LOOP FETCH taxCursor INTO i; 
+EXIT WHEN taxCursor % NOTFOUND; 
+
+IF i.averagebonus <= 300 THEN taxPercent := 0.09; 
+ELSIF i.averagebonus <= 500 THEN taxPercent := 0.12; 
+ELSE taxPercent := 0.15; 
+END IF; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+CLOSE taxCursor; 
+END; 
+/
+
+DECLARE 
+CURSOR taxCursor IS 
+SELECT bonusC.empno, 
+bonusC.month, 
+bonusC.year, 
+sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+i taxCursor % ROWTYPE; 
+taxPercent REAL := 0; 
+BEGIN OPEN taxCursor; 
+LOOP FETCH taxCursor INTO i; 
+EXIT WHEN taxCursor % NOTFOUND; 
+
+
+CASE 
+WHEN i.averagebonus <= 300 THEN taxPercent := 0.09; 
+WHEN i.averagebonus <= 500 THEN taxPercent := 0.12; 
+ELSE taxPercent := 0.15; 
+END CASE; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+CLOSE taxCursor; 
+END;
+/
+
+-- b)   с помощью курсорного цикла FOR;
+DECLARE
+CURSOR bonusCursor IS
+SELECT bonusC.empno,
+       bonusC.month,
+       bonusC.year,
+       sum(bonus.bonvalue) / bonusC.month AS averagebonus
+FROM bonus bonusC
+JOIN bonus ON bonus.empno = bonusC.empno
+AND bonus.year = bonusC.year
+AND bonus.month <= bonusC.month
+GROUP BY bonusC.empno,
+         bonusC.month,
+         bonusC.year;
+
+taxPercent REAL := 0;
+
+BEGIN
+  FOR i IN bonusCursor LOOP
+    IF i.averagebonus <= 300 THEN taxPercent := 0.09;
+    ELSIF i.averagebonus <= 500 THEN taxPercent := 0.12;
+    ELSE taxPercent := 0.15;
+    END IF;
+
+    UPDATE bonus
+    SET tax = bonvalue * taxPercent
+    WHERE empno = i.empno
+      AND YEAR = i.year
+      AND MONTH = i.month;
+  END LOOP;
+END;
+/
+
+-- c) с помощью курсора с параметром, передавая номер сотрудника, для которого необходимо посчитать налог. 
+CREATE OR REPLACE PROCEDURE task1c(employee IN INTEGER) IS
+  CURSOR bonusCursor (employee INTEGER) IS
+  SELECT bonusC.empno,
+         bonusC.month,
+         bonusC.year,
+         sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+  FROM bonus bonusC
+  JOIN bonus ON bonus.empno = bonusC.empno
+  AND bonus.year = bonusC.year
+  AND bonus.month <= bonusC.month
+  WHERE bonusC.empno = employee
+  GROUP BY bonusC.empno,
+           bonusC.month,
+           bonusC.year;
+
+  i bonusCursor % ROWTYPE;
+  taxPercent REAL := 0;
+  BEGIN OPEN bonusCursor(employee);
+    LOOP FETCH bonusCursor INTO i;
+      EXIT WHEN bonusCursor % NOTFOUND;
+
+      IF i.averagebonus <= 300 THEN taxPercent := 0.09;
+      ELSIF i.averagebonus <= 500 THEN taxPercent := 0.12;
+      ELSE taxPercent := 0.15;
+      END IF;
+
+      UPDATE bonus
+      SET tax = bonvalue * taxPercent
+      WHERE empno = i.empno
+        AND YEAR = i.year
+        AND MONTH = i.month;
+    END LOOP;
+  CLOSE bonusCursor;
+END task1c;
+/
+  
+--2.   Оформите составленные программы в виде процедур Bonus_loop_if, Bonus_loop_case, Bonus_for, Bonus_cour(emp_par).
+CREATE OR REPLACE PROCEDURE Bonus_loop_if IS 
+CURSOR taxCursor IS 
+SELECT bonusC.empno, bonusC.month, bonusC.year, sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+i taxCursor % ROWTYPE; 
+taxPercent REAL := 0; 
+BEGIN OPEN taxCursor; 
+LOOP FETCH taxCursor INTO i; 
+EXIT WHEN taxCursor % NOTFOUND; 
+
+IF i.averagebonus <= 300 THEN taxPercent := 0.09; 
+ELSIF i.averagebonus <= 500 THEN taxPercent := 0.12; 
+ELSE taxPercent := 0.15; 
+END IF; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+CLOSE taxCursor; 
+END Bonus_loop_if; 
+/ 
+
+CREATE OR REPLACE PROCEDURE Bonus_loop_case IS 
+CURSOR taxCursor IS 
+SELECT bonusC.empno, 
+bonusC.month, 
+bonusC.year, 
+sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+i taxCursor % ROWTYPE; 
+taxPercent REAL := 0; 
+BEGIN OPEN taxCursor; 
+LOOP FETCH taxCursor INTO i; 
+EXIT WHEN taxCursor % NOTFOUND; 
+
+
+CASE 
+WHEN i.averagebonus <= 300 THEN taxPercent := 0.09; 
+WHEN i.averagebonus <= 500 THEN taxPercent := 0.12; 
+ELSE taxPercent := 0.15; 
+END CASE; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+CLOSE taxCursor; 
+END Bonus_loop_case; 
+/ 
+
+CREATE OR REPLACE PROCEDURE Bonus_for IS 
+CURSOR taxCursor IS 
+SELECT bonusC.empno, 
+bonusC.month, 
+bonusC.year, 
+sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+taxPercent REAL := 0; 
+
+BEGIN 
+FOR i IN taxCursor LOOP 
+IF i.averagebonus <= 300 THEN taxPercent := 0.09; 
+ELSIF i.averagebonus <= 500 THEN taxPercent := 0.12; 
+ELSE taxPercent := 0.15; 
+END IF; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+END Bonus_for; 
+/ 
+
+CREATE OR REPLACE PROCEDURE Bonus_cour(employee IN INTEGER) IS 
+CURSOR taxCursor (employee INTEGER) IS 
+SELECT bonusC.empno, 
+bonusC.month, 
+bonusC.year, 
+sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+WHERE bonusC.empno = employee 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+i taxCursor % ROWTYPE; 
+taxPercent REAL := 0; 
+BEGIN OPEN taxCursor(employee); 
+LOOP FETCH
+taxCursor INTO i; 
+EXIT WHEN taxCursor % NOTFOUND; 
+
+IF i.averagebonus <= 300 THEN taxPercent := 0.09; 
+ELSIF i.averagebonus <= 500 THEN taxPercent := 0.12; 
+ELSE taxPercent := 0.15; 
+END IF; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+CLOSE taxCursor; 
+END Bonus_cour; 
+/ 
+
+--3.   Создайте процедуру Bonus_emp(perc1, perc2, perc3, emp_par), вычисления налога и вставки его в таблицу Bonus за всё время начислений для конкретного сотрудника. 
+--В качестве параметров передать проценты налога (до 500, от 501 до 1000, выше 1000), номер сотрудника.
+CREATE OR REPLACE PROCEDURE Bonus_emp(perc1 IN REAL, perc2 IN REAL, perc3 IN REAL, emp_par IN INTEGER) IS 
+CURSOR taxCursor (emp_par INTEGER) IS 
+SELECT bonusC.empno, 
+bonusC.month, 
+bonusC.year, 
+sum(bonus.bonvalue) / bonusC.month AS averagebonus 
+FROM bonus bonusC 
+JOIN bonus ON bonus.empno = bonusC.empno 
+AND bonus.year = bonusC.year 
+AND bonus.month <= bonusC.month 
+WHERE bonusC.empno = emp_par 
+GROUP BY bonusC.empno, 
+bonusC.month, 
+bonusC.year; 
+
+i taxCursor % ROWTYPE; 
+taxPercent REAL := 0; 
+
+BEGIN OPEN taxCursor(emp_par); 
+LOOP FETCH taxCursor INTO i; 
+EXIT WHEN taxCursor % NOTFOUND; 
+IF i.averagebonus <= 300 THEN taxPercent := perc1; 
+ELSIF i.averagebonus <= 500 THEN taxPercent := perc2; 
+ELSE taxPercent := perc3; 
+END IF; 
+
+UPDATE bonus 
+SET tax = bonvalue * taxPercent 
+WHERE empno = i.empno 
+AND YEAR = i.year 
+AND MONTH = i.month; 
+END LOOP; 
+CLOSE taxCursor; 
+END Bonus_emp; 
+/
+
+--4.   Создайте функцию Bonus_summ(perc1, perc2, perc3, emp_par), вычисляющую суммарный налог на премию сотрудника за всё время начислений. 
+--В качестве параметров передать процент налога (до 300, от 301 до 500 , выше 500), номер сотрудника.
+-- Возвращаемое значение – суммарный налог.
+
+ 
+
+
+  
+    
