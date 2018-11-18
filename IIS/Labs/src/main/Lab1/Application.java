@@ -29,12 +29,12 @@ public class Application {
 	static JTextArea areaAllSteps = new JTextArea("Пошаговая развертка\n");
 	static Thread playMusic = new Thread(() -> {
 		try {
-							InputStream fileInputStream = new FileInputStream("resources1/music.mp3");
-							Player player = new Player(fileInputStream);
-							player.play();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+			InputStream fileInputStream = new FileInputStream("resources1/music.mp3");
+			Player player = new Player(fileInputStream);
+			player.play();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	});
 	static Thread threadOfMicroexpert = new Thread(() -> {
 
@@ -99,7 +99,7 @@ public class Application {
 					e.printStackTrace();
 				}
 				super.paintComponent(g);
-				g.drawImage(bufferedImage, 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), this);
+				g.drawImage(bufferedImage, 0, 0, getWidth(), getHeight(), this);
 			}
 		}), BorderLayout.CENTER);
 
