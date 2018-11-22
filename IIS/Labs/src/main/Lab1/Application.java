@@ -12,17 +12,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
 
 public class Application {
 
+	static Statement aimStatement = new Statement(Attribute.HAS_NAME, null);
+	static HashMap<String, Statement> aimStatements = new HashMap<>();
+	static JComboBox comboBoxAimKey = new JComboBox();
+	static JLabel labelAimResult = new JLabel("?");
+	static JLabel labelChooseAttributeValue = new JLabel("Выберите значение атрибута");
 	static JComboBox comboBoxChoose = new JComboBox();
 	static ThreadEvent threadEvent = new ThreadEvent();
-	static JLabel labelChooseAttributeValue = new JLabel("Выберите значение атрибута");
-	static JLabel labelAimResult = new JLabel("?");
 	static JPanel panelPicture = new JPanel(new BorderLayout());
 	static int numberOfPicture = 1;
 	static StringBuilder allStepsBuilder = new StringBuilder();
@@ -39,7 +40,7 @@ public class Application {
 	static Thread threadOfMicroexpert = new Thread(() -> {
 
 		try {
-			analyzeBDOfRules(new Statement(Attribute.HAS_NAME, null));
+			analyzeBDOfRules(aimStatement);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -47,6 +48,7 @@ public class Application {
 
 	public static void main(String[] args) {
 
+		fillAimStatements();
 		playMusic.start();
 		createGUI();
 		threadOfMicroexpert.start();
@@ -68,7 +70,6 @@ public class Application {
 
 		JFrame frame = new JFrame();
 		JButton buttonRestart = new JButton("Начать заново");
-		JLabel labelAim = new JLabel("Ищем имя персонажа");
 		JButton buttonOk = new JButton("Ok");
 
 		JPanel panelAttributes = new JPanel(new BorderLayout());
@@ -77,7 +78,7 @@ public class Application {
 		JPanel panelSteps = new JPanel(new BorderLayout());
 
 		panelAim.add(buttonRestart, BorderLayout.WEST);
-		panelAim.add(labelAim, BorderLayout.CENTER);
+		panelAim.add(comboBoxAimKey, BorderLayout.CENTER);
 		panelAim.add(labelAimResult, BorderLayout.EAST);
 
 		panelChoose.add(labelChooseAttributeValue, BorderLayout.NORTH);
@@ -217,6 +218,7 @@ public class Application {
 
 	private static void restart() {
 
+		aimStatement = aimStatements.get(comboBoxAimKey.getSelectedItem().toString());
 		cleanGUI();
 		rules = new ArrayList<>(Rule.rules);
 		stackOfAims = new Stack<>();
@@ -225,13 +227,22 @@ public class Application {
 		threadOfMicroexpert = new Thread(() -> {
 
 			try {
-				analyzeBDOfRules(new Statement(Attribute.HAS_NAME, null));
+				analyzeBDOfRules(aimStatement);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		});
 		threadOfMicroexpert.start();
 
+	}
+
+	private static void fillAimStatements(){
+		comboBoxAimKey.removeAllItems(); // чистка
+		aimStatements.put(Attribute.HAS_NAME.key, new Statement(Attribute.HAS_NAME, null));
+		aimStatements.put(Attribute.IS_ALIVE.key, new Statement(Attribute.IS_ALIVE, null));
+		for (String v : aimStatements.keySet()) {
+			comboBoxAimKey.addItem(v);
+		}
 	}
 
 	private static void logStep(int ruleNumber, String ruleValue, String chosenValue, String attributeName, int ruleNumber2, String contextAttributeName, String chosenValue2,
