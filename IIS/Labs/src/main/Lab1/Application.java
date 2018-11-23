@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Application {
 
-	static Statement aimStatement = new Statement(Attribute.HAS_NAME, null);
+	static Statement aimStatement;
 	static HashMap<String, Statement> aimStatements = new HashMap<>();
 	static JComboBox comboBoxAimKey = new JComboBox();
 	static JLabel labelAimResult = new JLabel("?");
@@ -48,6 +48,9 @@ public class Application {
 
 	public static void main(String[] args) {
 
+		JsonParser.parseBaseOfKnowledges();
+		aimStatement = new Statement(JsonParser.attributesHashMap.get("Имя"), null);
+		rules = new ArrayList<>(JsonParser.rulesList);
 		fillAimStatements();
 		playMusic.start();
 		createGUI();
@@ -136,7 +139,7 @@ public class Application {
 
 	}
 
-	static List<Rule> rules = new ArrayList<>(Rule.rules);
+	static List<Rule> rules;
 	static Stack<Pair<Statement, Rule>> stackOfAims = new Stack<>();
 	static Stack<Pair<Statement, Rule>> stackOfContext = new Stack<>();
 	static int step = 0;
@@ -176,6 +179,9 @@ public class Application {
 					currentAim.getKey().setChosenValue(chosenValue);
 					stackOfContext.push(currentAim);
 					logStep(-1, "", chosenValue, "", -1, currentAim.getKey().attribute.key, chosenValue, -1, -1);
+					//if(stackOfAims.empty()){
+					//	break;//Больше целей нет, а значит, чтобы не было ошибки дальше в while, выхожу
+					//}
 				} else {
 					break;
 				}
@@ -220,7 +226,7 @@ public class Application {
 
 		aimStatement = aimStatements.get(comboBoxAimKey.getSelectedItem().toString());
 		cleanGUI();
-		rules = new ArrayList<>(Rule.rules);
+		rules = new ArrayList<>(JsonParser.rulesList);
 		stackOfAims = new Stack<>();
 		stackOfContext = new Stack<>();
 		threadOfMicroexpert.stop();
@@ -236,10 +242,12 @@ public class Application {
 
 	}
 
-	private static void fillAimStatements(){
+	private static void fillAimStatements() {
+
 		comboBoxAimKey.removeAllItems(); // чистка
-		aimStatements.put(Attribute.HAS_NAME.key, new Statement(Attribute.HAS_NAME, null));
-		aimStatements.put(Attribute.IS_ALIVE.key, new Statement(Attribute.IS_ALIVE, null));
+		//JsonParser.attributesHashMap.values().stream().forEach(a -> aimStatements.put(a.key, new Statement(a, null)));
+		aimStatements.put(JsonParser.attributesHashMap.get("Имя").key, new Statement(JsonParser.attributesHashMap.get("Имя"), null));
+		aimStatements.put(JsonParser.attributesHashMap.get("Живой").key, new Statement(JsonParser.attributesHashMap.get("Живой"), null));
 		for (String v : aimStatements.keySet()) {
 			comboBoxAimKey.addItem(v);
 		}
