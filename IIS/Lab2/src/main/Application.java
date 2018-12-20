@@ -234,7 +234,7 @@ public class Application extends JFrame {
 							maxI = i;
 						}
 					}
-					muTextField.setText(maxMuAki + "");
+					muTextField.setText(setPrecision(maxMuAki, 3));
 					classNameTextField.setText(classNames[maxI]);
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Неверный формат ввода!", null, JOptionPane.ERROR_MESSAGE);
@@ -242,5 +242,10 @@ public class Application extends JFrame {
 				}
 			}
 		});
+	}
+
+	private static String setPrecision(double amt, int precision) {
+
+		return String.format("%." + precision + "f", amt);
 	}
 }
