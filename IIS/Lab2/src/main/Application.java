@@ -1,83 +1,95 @@
 package main;
 
-import javax.imageio.ImageIO;
-import javax.print.DocFlavor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Application extends JFrame {
 
-	private static String[] indicationNames; //n
-	private static String[] classNames;//l
-	private static boolean classes[][][];
-	private static double[][] bit;
-	private static double[][] ait;
-	private static double[] bt;
-	private static int t;
-	private static int l;
+	private String[] indicationNames; //n
+	private String[] classNames;//l
+	private boolean classes[][][];
+	private double[][] bit;
+	private double[][] ait;
+	private double[] bt;
+	private int t;
+	private int l;
 
 	public static void main(String[] args) {
 
-		createGUI();
+		new Application().createGUI();
 	}
 
-	public static void createGUI() {
+	public void createGUI() {
 
 		JFrame frame = new JFrame();
-		JButton buttonFindClass = new JButton("Find class");
-
+		frame.setLayout(new GridLayout(5, 1));
+		//original data
+		JPanel panelOriginalData = new JPanel(new BorderLayout());
+		panelOriginalData.add(new JLabel("Исходные данные"), BorderLayout.NORTH);
+		JTextArea textAreaOriginalData = new JTextArea();
+		textAreaOriginalData.setEditable(false);
+		panelOriginalData.add(textAreaOriginalData, BorderLayout.CENTER);
+		//b_it and b_t
+		JPanel panelBitAndBt = new JPanel(new BorderLayout());
+		//b_it
+		JPanel panelBit = new JPanel(new BorderLayout());
+		panelBit.add(new JLabel("Параметры b_it"), BorderLayout.NORTH);
+		JTextArea textAreaBit = new JTextArea();
+		textAreaBit.setEditable(false);
+		panelBit.add(textAreaBit, BorderLayout.CENTER);
+		//b_t
+		JPanel panelBt = new JPanel(new BorderLayout());
+		panelBt.add(new JLabel("Параметры b_t"), BorderLayout.NORTH);
+		JTextArea textAreaBt = new JTextArea();
+		textAreaBt.setEditable(false);
+		panelBt.add(textAreaBt, BorderLayout.CENTER);
+		panelBitAndBt.add(panelBit, BorderLayout.CENTER);
+		panelBitAndBt.add(panelBt, BorderLayout.SOUTH);
+		//a_it
+		JPanel panelAit = new JPanel(new BorderLayout());
+		panelAit.add(new JLabel("Параметры a_it"), BorderLayout.NORTH);
+		JTextArea textAreaAit = new JTextArea();
+		textAreaAit.setEditable(false);
+		panelAit.add(textAreaAit, BorderLayout.CENTER);
+		//input
+		JPanel panelInput = new JPanel(new BorderLayout());
+		panelInput.add(new JLabel("Объект для распознавания"), BorderLayout.NORTH);
 		JTextField inputTextField = new JTextField();
-		JPanel panelAttributes = new JPanel(new BorderLayout());
-		JPanel panelAim = new JPanel(new BorderLayout());
-		JPanel panelChoose = new JPanel(new BorderLayout());
-		JPanel panelSteps = new JPanel(new BorderLayout());
-
-		//		panelAim.add(buttonRestart, BorderLayout.WEST);
-		//		panelAim.add(comboBoxAimKey, BorderLayout.CENTER);
-		//		panelAim.add(labelAimResult, BorderLayout.EAST);
-		//
-		//		panelChoose.add(labelChooseAttributeValue, BorderLayout.NORTH);
-		//		panelChoose.add(comboBoxChoose, BorderLayout.CENTER);
-		//		panelChoose.add(buttonOk, BorderLayout.EAST);
-		//
-		//		panelAttributes.add(panelAim, BorderLayout.NORTH);
-		//		panelAttributes.add(panelChoose, BorderLayout.SOUTH);
-		//
-		//		panelPicture.add((new JPanel() {
-		//
-		//			@Override
-		//			protected void paintComponent(Graphics g) {
-		//
-		//				BufferedImage bufferedImage = new BufferedImage(20, 20, 1);
-		//				try {
-		//					bufferedImage = ImageIO.read(new File("resources1/" + numberOfPicture + ".jpg"));
-		//				} catch (IOException e) {
-		//					e.printStackTrace();
-		//				}
-		//				super.paintComponent(g);
-		//				g.drawImage(bufferedImage, 0, 0, getWidth(), getHeight(), this);
-		//			}
-		//		}), BorderLayout.CENTER);
-		//
-		//		panelSteps.add(new JScrollPane(areaAllSteps), BorderLayout.CENTER);
-		//
-		//		frame.setLayout(new GridLayout(3, 1));
-		//		frame.add(panelAttributes);
-		//		frame.add(panelPicture);
-		frame.add(panelSteps);
+		panelInput.add(inputTextField, BorderLayout.CENTER);
+		JButton buttonFindClass = new JButton("Найти класс");
+		panelInput.add(buttonFindClass, BorderLayout.SOUTH);
+		//output
+		JPanel panelOutput = new JPanel(new GridLayout(4, 1));
+		panelOutput.add(new JLabel("maxMuAki - величина принадлежности объекта классу"));
+		JTextField muTextField = new JTextField();
+		muTextField.setEditable(false);
+		panelOutput.add(muTextField);
+		panelOutput.add(new JLabel("Класс объекта"));
+		JTextField classNameTextField = new JTextField();
+		classNameTextField.setEditable(false);
+		panelOutput.add(classNameTextField);
+		//add panels
+		frame.add(panelOriginalData);
+		frame.add(panelBitAndBt);
+		frame.add(panelAit);
+		frame.add(panelInput);
+		frame.add(panelOutput);
+		//frame.add(panelSteps);
 		frame.setLocation(300, 30);
 		frame.setSize(700, 700);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("File");
-		JMenuItem openFileItem = new JMenuItem("Open");
+		JMenu menu = new JMenu("Файл");
+		JMenuItem openFileItem = new JMenuItem("Открыть");
 		menu.add(openFileItem);
 		menuBar.add(menu);
 		frame.setJMenuBar(menuBar);
@@ -151,15 +163,15 @@ public class Application extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//find class
 				try {
-					Boolean[] obj = Arrays.stream(inputTextField.getText().split(" ")).map(Boolean::valueOf).toArray(Boolean[]::new);
-					double maxMuI = -1;
+					Boolean[] obj = Arrays.stream(inputTextField.getText().split(" ")).map("1"::equals).toArray(Boolean[]::new);
+					double maxMuAki = -1;
 					int maxI = -1;
 					for (int i = 0; i < classes.length; i++) {
 						double sumA = 0;
 						for (int k = 0; k < t; k++) {
 							sumA += ait[i][k];
 						}
-						double maxMu = 0;
+						double maxMuXi = 0;
 						for (int j = 0; j < classes[i].length; j++) {
 							double mu = 0;
 							for (int k = 0; k < t; k++) {
@@ -167,18 +179,20 @@ public class Application extends JFrame {
 							}
 							mu /= sumA;
 							mu = Math.max(0, mu);
-							if (mu > maxMu) {
-								maxMu = mu;
+							if (mu > maxMuXi) {
+								maxMuXi = mu;
 							}
 						}
 						//jTextField3.setText(jTextField3.getText() + limit(String.valueOf(maxMu)) + "  ");
-						if (maxMu > maxMuI) {
-							maxMuI = maxMu;
+						if (maxMuXi > maxMuAki) {
+							maxMuAki = maxMuXi;
 							maxI = i;
 						}
 					}
-					//jTextField4.setText(names[maxI]);
+					classNameTextField.setText(classNames[maxI]);
 				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Неверный формат ввода!", null, JOptionPane.ERROR_MESSAGE);
+					Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
 		});
