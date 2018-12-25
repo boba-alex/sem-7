@@ -118,7 +118,7 @@ public class ModelingBasicRandomVariable {
 			maxDn2 = Math.max(Math.abs(empiricalFunc - func0), maxDn2);
 		}
 
-		double statistics2 = maxDn1 * Math.sqrt(N);
+		double statistics2 = maxDn2 * Math.sqrt(N);
 		System.out.println("Statistics 2 : " + statistics2);
 		if (statistics2 < quantile) {
 			System.out.println("Statistics 2 : " + statistics2 + " < " + quantile);
